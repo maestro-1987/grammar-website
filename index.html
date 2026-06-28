@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语语法学习 - 沪教牛津版四年级下册</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6C5CE7;
+            --primary-light: #A29BFE;
+            --bg: #F0F0F7;
+            --card-bg: #FFFFFF;
+            --text: #2D3436;
+            --text-light: #636E72;
+            --success: #00B894;
+            --danger: #FF7675;
+            --warning: #FDCB6E;
+            --radius: 16px;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: -apple-system, "Microsoft YaHei", "Segoe UI", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height:1.6;
+        }
+
+        /* ===== Header ===== */
+        .header {
+            background: linear-gradient(135deg, #6C5CE7 0%, #A29BFE 100%);
+            color: white;
+            padding: 24px 20px;
+            text-align: center;
+            box-shadow: 0 2px 15px rgba(108,92,231,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 4px;
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.85;
+        }
+
+        .header-actions {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .wrong-book-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.4);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .wrong-book-btn:hover {
+            background: rgba(255,255,255,0.35);
+            border-color: rgba(255,255,255,0.7);
+        }
+
+        .wb-count-badge {
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: none;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.35);
+        }
+
+        /* ===== Container ===== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px 16px;
+        }
+
+        /* ===== Home View - Unit Grid ===== */
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: "";
+            width: 4px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .unit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .unit-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .unit-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .unit-card-header {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            position: relative;
+        }
+
+        .unit-card-header::after {
+            content: attr(data-unit);
+            position: absolute;
+            top: 8px;
+            left: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.7);
+            letter-spacing: 1px;
+        }
+
+        .unit-card-body {
+            padding: 16px;
+        }
+
+        .unit-card-body h3 {
+            font-size: 16px;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+
+        .unit-card-body p {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        .unit-card-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .unit-card-btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-learn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-learn:hover {
+            background: #5A4BD1;
+        }
+
+        .btn-test {
+            background: #E8E8F0;
+            color: var(--primary);
+        }
+
+        .btn-test:hover {
+            background: #DDDDE8;
+        }
+
+        /* ===== Learn View ===== */
+        .learn-view, .test-view, .wrong-book-view {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .unit-banner {
+            border-radius: var(--radius);
+            padding: 24px;
+            color: white;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .unit-banner-icon {
+            font-size: 56px;
+        }
+
+        .unit-banner-info h2 {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+
+        .unit-banner-info p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .knowledge-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .knowledge-card h3 {
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .knowledge-card h3 .icon {
+            font-size: 22px;
+        }
+
+        .knowledge-explanation {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 14px;
+            padding: 12px;
+            background: #F8F7FE;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-light);
+        }
+
+        .rule-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .rule-table th {
+            background: #F0F0F7;
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .rule-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #EEE;
+        }
+
+        .rule-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .rule-table .example {
+            color: var(--primary);
+            font-family: "Consolas", monospace;
+            font-weight: 600;
+        }
+
+        .rule-table .translation {
+            color: var(--text-light);
+            font-size: 13px;
+        }
+
+        .key-sentences {
+            display: grid;
+            gap: 8px;
+        }
+
+        .sentence-item {
+            padding: 10px 14px;
+            background: #F8F9FE;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-light);
+            font-size: 14px;
+        }
+
+        .sentence-item .en {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .sentence-item .zh {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .pronunciation-box {
+            background: #FFF8E1;
+            border-radius: 10px;
+            padding: 14px;
+            margin-top: 8px;
+        }
+
+        .pron-group {
+            margin-bottom: 10px;
+        }
+
+        .pron-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .pron-header {
+            font-weight: 700;
+            color: #F57F17;
+            margin-bottom: 4px;
+        }
+
+        .pron-words {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        /* ===== Test View ===== */
+        .test-header {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .test-info h3 {
+            font-size: 18px;
+            color: var(--text);
+        }
+
+        .test-info p {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .test-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .test-btn {
+            padding: 8px 18px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .test-btn.primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .test-btn.primary:hover {
+            background: #5A4BD1;
+        }
+
+        .test-btn.secondary {
+            background: #E8E8F0;
+            color: var(--primary);
+        }
+
+        .test-btn.secondary:hover {
+            background: #DDDDE8;
+        }
+
+        .test-btn.danger {
+            background: #FFE0E0;
+            color: var(--danger);
+        }
+
+        .test-btn.danger:hover {
+            background: #FFD0D0;
+        }
+
+        .test-progress {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 12px 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: #E8E8F0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            white-space: nowrap;
+        }
+
+        .question-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .question-type {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .question-type.choice {
+            background: #E3F2FD;
+            color: #1976D2;
+        }
+
+        .question-type.fill {
+            background: #FFF3E0;
+            color: #F57C00;
+        }
+
+        .question-text {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .question-input {
+            font-size: 16px;
+            padding: 10px 14px;
+            border: 2px solid #DDD;
+            border-radius: 10px;
+            width: 100%;
+            outline: none;
+            transition: border 0.2s;
+            font-family: inherit;
+        }
+
+        .question-input:focus {
+            border-color: var(--primary);
+        }
+
+        .options-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .option-item {
+            padding: 12px 16px;
+            border: 2px solid #E0E0E0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option-item:hover {
+            border-color: var(--primary-light);
+            background: #F8F7FE;
+        }
+
+        .option-item.selected {
+            border-color: var(--primary);
+            background: #F0EFFF;
+        }
+
+        .option-item.correct {
+            border-color: var(--success);
+            background: #E8F8F5;
+        }
+
+        .option-item.wrong {
+            border-color: var(--danger);
+            background: #FDEAEA;
+        }
+
+        .option-letter {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #E8E8F0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--text);
+            flex-shrink: 0;
+        }
+
+        .option-item.correct .option-letter {
+            background: var(--success);
+            color: white;
+        }
+
+        .option-item.wrong .option-letter {
+            background: var(--danger);
+            color: white;
+        }
+
+        .feedback {
+            margin-top: 12px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #E8F8F5;
+            color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: #FDEAEA;
+            color: var(--danger);
+        }
+
+        .feedback .answer {
+            font-weight: 700;
+        }
+
+        .test-result {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 32px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            display: none;
+        }
+
+        .result-score {
+            font-size: 48px;
+            font-weight: 800;
+            margin: 10px 0;
+        }
+
+        .result-score.pass {
+            color: var(--success);
+        }
+
+        .result-score.fail {
+            color: var(--danger);
+        }
+
+        .result-message {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ===== Wrong Book View ===== */
+        .wb-header {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .wb-stats {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .wb-stat-item {
+            text-align: center;
+        }
+
+        .wb-stat-num {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--danger);
+        }
+
+        .wb-stat-label {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .wb-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .wb-unit-group {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .wb-unit-header {
+            padding: 14px 20px;
+            font-weight: 700;
+            font-size: 16px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .wb-unit-header .wb-unit-count {
+            background: rgba(255,255,255,0.3);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 13px;
+        }
+
+        .wb-question-item {
+            padding: 14px 20px;
+            border-bottom: 1px solid #F0F0F0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .wb-question-item:last-child {
+            border-bottom: none;
+        }
+
+        .wb-q-number {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #FFE0E0;
+            color: var(--danger);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        .wb-q-content {
+            flex: 1;
+        }
+
+        .wb-q-text {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+
+        .wb-q-detail {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .wb-q-detail .wrong-answer {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        .wb-q-detail .correct-answer {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .wb-q-actions {
+            display: flex;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .wb-q-btn {
+            padding: 4px 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .wb-q-btn.remove {
+            background: #FFE0E0;
+            color: var(--danger);
+        }
+
+        .wb-q-btn.remove:hover {
+            background: #FFD0D0;
+        }
+
+        .wb-q-btn.test-one {
+            background: #E8E8F0;
+            color: var(--primary);
+        }
+
+        .wb-q-btn.test-one:hover {
+            background: #DDDDE8;
+        }
+
+        .wb-empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+        }
+
+        .wb-empty-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .wb-empty-text {
+            font-size: 16px;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 20px; }
+            .unit-card-header { height: 80px; font-size: 36px; }
+            .unit-banner { flex-direction: column; text-align: center; }
+            .question-text { font-size: 15px; }
+            .header-actions { position: static; transform: none; margin-top: 10px; justify-content: center; }
+            .wrong-book-btn { font-size: 12px; padding: 6px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <button class="back-btn" id="backBtn">&#8592; 返回</button>
+    <h1>English Grammar</h1>
+    <p>沪教牛津版 四年级下册 语法学习与测试</p>
+    <div class="header-actions">
+        <button class="wrong-book-btn" id="wrongBookBtn" onclick="openWrongBook()">
+            &#128214; 错题本<span class="wb-count-badge" id="wbCountBadge">0</span>
+        </button>
+    </div>
+</div>
+
+<div class="container">
+    <!-- ===== Home View ===== -->
+    <div id="homeView">
+        <div class="section-title">选择单元开始学习</div>
+        <div class="unit-grid" id="unitGrid"></div>
+    </div>
+
+    <!-- ===== Learn View ===== -->
+    <div id="learnView" class="learn-view"></div>
+
+    <!-- ===== Test View ===== -->
+    <div id="testView" class="test-view"></div>
+
+    <!-- ===== Wrong Book View ===== -->
+    <div id="wrongBookView" class="wrong-book-view"></div>
+</div>
+
+<script src="data.js"></script>
+<script>
+// ============================================================
+// Wrong Book Management (localStorage)
+// ============================================================
+const WRONG_BOOK_KEY = 'grammar_wrong_book';
+
+function getWrongBook() {
+    try {
+        const data = localStorage.getItem(WRONG_BOOK_KEY);
+        return data ? JSON.parse(data) : [];
+    } catch(e) {
+        return [];
+    }
+}
+
+function saveWrongBook(data) {
+    localStorage.setItem(WRONG_BOOK_KEY, JSON.stringify(data));
+}
+
+function addToWrongBook(unitId, question, userAnswer) {
+    const book = getWrongBook();
+    // Create a unique ID for this question
+    const qId = `${unitId}_${question.question.substring(0, 30)}`;
+    
+    // Check if already in wrong book
+    const existingIndex = book.findIndex(item => item.id === qId);
+    
+    if (existingIndex >= 0) {
+        // Update existing entry (update wrong count and last wrong time)
+        book[existingIndex].wrongCount = (book[existingIndex].wrongCount || 0) + 1;
+        book[existingIndex].lastWrongTime = new Date().toISOString();
+        book[existingIndex].userAnswer = userAnswer;
+    } else {
+        // Add new entry
+        book.push({
+            id: qId,
+            unitId: unitId,
+            question: question.question,
+            type: question.type,
+            options: question.options || null,
+            userAnswer: userAnswer,
+            correctAnswer: question.type === 'choice' ? question.options[question.answer] : question.answer,
+            answerIndex: question.type === 'choice' ? question.answer : null,
+            explanation: question.explanation,
+            wrongCount: 1,
+            firstWrongTime: new Date().toISOString(),
+            lastWrongTime: new Date().toISOString()
+        });
+    }
+    
+    saveWrongBook(book);
+    updateWrongBookCount();
+}
+
+function removeFromWrongBook(qId) {
+    let book = getWrongBook();
+    book = book.filter(item => item.id !== qId);
+    saveWrongBook(book);
+    updateWrongBookCount();
+    // Re-render the wrong book view if it's open
+    if (currentView === 'wrongBook') {
+        renderWrongBook();
+    }
+}
+
+function clearWrongBook() {
+    if (confirm('确定要清空所有错题吗？此操作不可恢复。')) {
+        saveWrongBook([]);
+        updateWrongBookCount();
+        if (currentView === 'wrongBook') {
+            renderWrongBook();
+        }
+    }
+}
+
+function updateWrongBookCount() {
+    const book = getWrongBook();
+    const count = book.length;
+    const badge = document.getElementById('wbCountBadge');
+    if (badge) {
+        badge.textContent = count;
+        badge.style.display = count > 0 ? 'inline-flex' : 'none';
+    }
+}
+
+function getWrongBookByUnit() {
+    const book = getWrongBook();
+    const grouped = {};
+    
+    book.forEach(item => {
+        if (!grouped[item.unitId]) {
+            grouped[item.unitId] = [];
+        }
+        grouped[item.unitId].push(item);
+    });
+    
+    return grouped;
+}
+
+// ============================================================
+// State Management
+// ============================================================
+let currentUnit = null;
+let currentView = 'home';
+
+// ============================================================
+// Navigation
+// ============================================================
+function showView(view) {
+    currentView = view;
+    document.getElementById('homeView').style.display = view === 'home' ? 'block' : 'none';
+    document.getElementById('learnView').style.display = view === 'learn' ? 'block' : 'none';
+    document.getElementById('testView').style.display = view === 'test' ? 'block' : 'none';
+    document.getElementById('wrongBookView').style.display = view === 'wrongBook' ? 'block' : 'none';
+    document.getElementById('backBtn').style.display = view === 'home' ? 'none' : 'inline-block';
+    window.scrollTo(0, 0);
+}
+
+function goHome() {
+    showView('home');
+}
+
+document.getElementById('backBtn').addEventListener('click', goHome);
+
+// ============================================================
+// Render Home (Unit Grid)
+// ============================================================
+function renderHome() {
+    const grid = document.getElementById('unitGrid');
+    grid.innerHTML = GRAMMAR_DATA.map(unit => `
+        <div class="unit-card" onclick="openUnit(${unit.id})">
+            <div class="unit-card-header" style="background: ${unit.bgGradient}" data-unit="${unit.title}">
+                ${unit.icon}
+            </div>
+            <div class="unit-card-body">
+                <h3>${unit.title} ${unit.subtitle}</h3>
+                <p>${unit.description}</p>
+                <div class="unit-card-actions">
+                    <button class="unit-card-btn btn-learn" onclick="event.stopPropagation(); openLearn(${unit.id})">语法学习</button>
+                    <button class="unit-card-btn btn-test" onclick="event.stopPropagation(); openTest(${unit.id})">语法测试</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+    
+    updateWrongBookCount();
+}
+
+function openUnit(id) {
+    openLearn(id);
+}
+
+// ============================================================
+// Render Learn View
+// ============================================================
+function openLearn(id) {
+    const unit = GRAMMAR_DATA.find(u => u.id === id);
+    if (!unit) return;
+    currentUnit = unit;
+    showView('learn');
+
+    const html = `
+        <div class="unit-banner" style="background: ${unit.bgGradient}">
+            <div class="unit-banner-icon">${unit.icon}</div>
+            <div class="unit-banner-info">
+                <h2>${unit.title} ${unit.subtitle}</h2>
+                <p>${unit.description}</p>
+            </div>
+        </div>
+
+        <div class="section-title">语法知识点</div>
+        ${unit.knowledgePoints.map((kp, i) => `
+            <div class="knowledge-card">
+                <h3><span class="icon">${getIcon(i)}</span>${kp.title}</h3>
+                <div class="knowledge-explanation">${kp.explanation}</div>
+                <table class="rule-table">
+                    <thead>
+                        <tr>
+                            <th>规则</th>
+                            <th>说明</th>
+                            <th>例句</th>
+                            <th>翻译</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${kp.rules.map(r => `
+                            <tr>
+                                <td><strong>${r.rule}</strong></td>
+                                <td>${r.detail}</td>
+                                <td class="example">${r.example}</td>
+                                <td class="translation">${r.translation || ''}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `).join('')}
+
+        <div class="section-title">重点句型</div>
+        <div class="knowledge-card">
+            <div class="key-sentences">
+                ${unit.keySentences.map(s => `
+                    <div class="sentence-item">
+                        <div class="en">${s.en}</div>
+                        <div class="zh">${s.zh}</div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+
+        ${unit.pronunciation && unit.pronunciation.groups.length > 0 ? `
+            <div class="section-title">字母组合发音</div>
+            <div class="knowledge-card">
+                <div class="pronunciation-box">
+                    ${unit.pronunciation.groups.map(g => `
+                        <div class="pron-group">
+                            <div class="pron-header">${g.combo} ${g.sound ? '(' + g.sound + ')' : ''}</div>
+                            <div class="pron-words">${g.words.join('、')}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        ` : ''}
+
+        <div style="text-align:center; margin: 24px 0;">
+            <button class="test-btn primary" style="padding: 12px 36px; font-size: 16px;" onclick="openTest(${unit.id})">
+                开始本单元测试
+            </button>
+        </div>
+    `;
+
+    document.getElementById('learnView').innerHTML = html;
+}
+
+function getIcon(index) {
+    const icons = ['1\uFE0F\u20E3', '2\uFE0F\u20E3', '3\uFE0F\u20E3', '4\uFE0F\u20E3', '5\uFE0F\u20E3'];
+    return icons[index] || '\uD83D\uDCDD';
+}
+
+// ============================================================
+// Render Test View
+// ============================================================
+let testState = {
+    questions: [],
+    currentIndex: 0,
+    answers: [],
+    completed: false,
+    isWrongBookTest: false
+};
+
+function openTest(id, isWrongBookTest = false) {
+    const unit = GRAMMAR_DATA.find(u => u.id === id);
+    if (!unit) return;
+    currentUnit = unit;
+
+    let questions;
+    
+    if (isWrongBookTest) {
+        // Get wrong book questions for this unit
+        const book = getWrongBook();
+        const unitWrong = book.filter(item => item.unitId === id);
+        
+        if (unitWrong.length === 0) {
+            alert('本单元没有错题！');
+            return;
+        }
+        
+        // Convert wrong book items back to question format
+        questions = unitWrong.map(item => ({
+            question: item.question,
+            type: item.type,
+            options: item.options,
+            answer: item.answerIndex,
+            answerText: item.correctAnswer,
+            explanation: item.explanation
+        }));
+    } else {
+        // Get questions from question bank and shuffle
+        const bank = QUESTION_BANK[id] || [];
+        questions = [...bank];
+        // Shuffle questions
+        for (let i = questions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [questions[i], questions[j]] = [questions[j], questions[i]];
+        }
+        // Limit to 10 questions
+        questions = questions.slice(0, 10);
+    }
+
+    testState = {
+        questions: questions,
+        currentIndex: 0,
+        answers: new Array(questions.length).fill(null),
+        completed: false,
+        isWrongBookTest: isWrongBookTest
+    };
+
+    showView('test');
+    renderTest();
+}
+
+function renderTest() {
+    const { questions, currentIndex, completed } = testState;
+
+    if (completed) {
+        renderTestResult();
+        return;
+    }
+
+    const unit = currentUnit;
+    const q = questions[currentIndex];
+    const total = questions.length;
+
+    const html = `
+        <div class="test-header">
+            <div class="test-info">
+                <h3>${unit.icon} ${unit.title} ${testState.isWrongBookTest ? '错题重练' : '语法测试'}</h3>
+                <p>共 ${total} 题 | 选择题和填空题</p>
+            </div>
+            <div class="test-controls">
+                <button class="test-btn secondary" onclick="goHome()">退出</button>
+            </div>
+        </div>
+
+        <div class="test-progress">
+            <div class="progress-text">${currentIndex + 1}/${total}</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: ${((currentIndex) / total) * 100}%"></div>
+            </div>
+        </div>
+
+        <div class="question-card" id="questionCard">
+            <span class="question-type ${q.type === 'choice' ? 'choice' : 'fill'}">
+                ${q.type === 'choice' ? '选择题' : '填空题'}
+            </span>
+            <div class="question-text">${q.question}</div>
+            ${q.type === 'choice' ? `
+                <div class="options-list">
+                    ${q.options.map((opt, i) => `
+                        <div class="option-item" onclick="selectOption(${i})" data-index="${i}">
+                            <div class="option-letter">${String.fromCharCode(65 + i)}</div>
+                            <span>${opt}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            ` : `
+                <input type="text" class="question-input" id="fillInput"
+                    placeholder="请输入答案..."
+                    onkeydown="if(event.key==='Enter') submitFill()"
+                    autocomplete="off">
+            `}
+            <div class="feedback" id="feedback"></div>
+            <div style="margin-top:16px; text-align:right;">
+                <button class="test-btn primary" id="submitBtn" onclick="${q.type === 'choice' ? 'submitChoice()' : 'submitFill()'}">
+                    确认
+                </button>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('testView').innerHTML = html;
+
+    // Auto-focus input for fill-in-the-blank
+    if (q.type === 'fill') {
+        setTimeout(() => {
+            const input = document.getElementById('fillInput');
+            if (input) input.focus();
+        }, 100);
+    }
+}
+
+function selectOption(index) {
+    // Remove previous selection
+    document.querySelectorAll('.option-item').forEach(el => el.classList.remove('selected'));
+    // Add selection
+    const items = document.querySelectorAll('.option-item');
+    if (items[index]) items[index].classList.add('selected');
+    // Store answer
+    testState.answers[testState.currentIndex] = index;
+}
+
+function submitChoice() {
+    const q = testState.questions[testState.currentIndex];
+    const selected = testState.answers[testState.currentIndex];
+
+    if (selected === null) {
+        alert('请选择一个答案！');
+        return;
+    }
+
+    // Show results
+    const items = document.querySelectorAll('.option-item');
+    items.forEach((el, i) => {
+        el.style.pointerEvents = 'none';
+        if (i === q.answer) {
+            el.classList.add('correct');
+        } else if (i === selected && i !== q.answer) {
+            el.classList.add('wrong');
+        }
+    });
+
+    const isCorrect = selected === q.answer;
+    showFeedback(isCorrect, q);
+    
+    // Handle wrong book
+    if (!isCorrect) {
+        const userAnswer = q.options[selected];
+        addToWrongBook(currentUnit.id, q, userAnswer);
+    } else if (testState.isWrongBookTest) {
+        // If this is a wrong book test and the user got it right, remove from wrong book
+        const qId = `${currentUnit.id}_${q.question.substring(0, 30)}`;
+        removeFromWrongBook(qId);
+    }
+}
+
+function submitFill() {
+    const q = testState.questions[testState.currentIndex];
+    const input = document.getElementById('fillInput');
+    const userAnswer = (input.value || '').trim().toLowerCase();
+    const correctAnswer = (q.answer || q.answerText || '').trim().toLowerCase();
+
+    if (!userAnswer) {
+        alert('请输入答案！');
+        return;
+    }
+
+    input.disabled = true;
+    input.style.borderColor = userAnswer === correctAnswer ? 'var(--success)' : 'var(--danger)';
+
+    testState.answers[testState.currentIndex] = userAnswer;
+    
+    const isCorrect = userAnswer === correctAnswer;
+    showFeedback(isCorrect, q);
+    
+    // Handle wrong book
+    if (!isCorrect) {
+        addToWrongBook(currentUnit.id, q, userAnswer);
+    } else if (testState.isWrongBookTest) {
+        // If this is a wrong book test and the user got it right, remove from wrong book
+        const qId = `${currentUnit.id}_${q.question.substring(0, 30)}`;
+        removeFromWrongBook(qId);
+    }
+}
+
+function showFeedback(isCorrect, q) {
+    const feedback = document.getElementById('feedback');
+    const submitBtn = document.getElementById('submitBtn');
+
+    if (isCorrect) {
+        feedback.className = 'feedback show correct';
+        feedback.innerHTML = '<strong>\u2705 回答正确！</strong>';
+    } else {
+        feedback.className = 'feedback show wrong';
+        const correctAns = q.type === 'choice'
+            ? q.options[q.answer]
+            : (q.answer || q.answerText || '');
+        feedback.innerHTML = `<strong>\u274C 回答错误！</strong> 正确答案：<span class="answer">${correctAns}</span><br>${q.explanation}`;
+    }
+
+    if (isCorrect) {
+        // If correct, also show explanation
+        feedback.innerHTML += `<br><small>\uD83D\uDCA1 ${q.explanation}</small>`;
+    }
+
+    submitBtn.textContent = testState.currentIndex < testState.questions.length - 1 ? '下一题' : '查看结果';
+    submitBtn.onclick = nextQuestion;
+}
+
+function nextQuestion() {
+    if (testState.currentIndex < testState.questions.length - 1) {
+        testState.currentIndex++;
+        renderTest();
+    } else {
+        testState.completed = true;
+        renderTestResult();
+    }
+}
+
+function renderTestResult() {
+    const { questions, answers } = testState;
+    let correctCount = 0;
+
+    questions.forEach((q, i) => {
+        if (q.type === 'choice') {
+            if (answers[i] === q.answer) correctCount++;
+        } else {
+            const userAns = (answers[i] || '').trim().toLowerCase();
+            const correctAns = (q.answer || q.answerText || '').trim().toLowerCase();
+            if (userAns === correctAns) correctCount++;
+        }
+    });
+
+    const total = questions.length;
+    const score = Math.round((correctCount / total) * 100);
+    const passed = score >= 60;
+
+    const html = `
+        <div class="test-result" style="display:block;">
+            <div style="font-size: 64px;">${passed ? '\uD83C\uDF89' : '\uD83D\uDCDA'}</div>
+            <div class="result-score ${passed ? 'pass' : 'fail'}">${score}\u5206</div>
+            <div class="result-message">
+                答对 ${correctCount} / ${total} 题<br>
+                ${passed ? '太棒了！你已经掌握了本单元的语法知识！' : '继续加油！多看几遍知识点再试试吧！'}
+            </div>
+
+            <div style="text-align:left; margin: 20px 0; max-height: 300px; overflow-y: auto;">
+                ${questions.map((q, i) => {
+                    const isCorrect = q.type === 'choice'
+                        ? answers[i] === q.answer
+                        : (answers[i] || '').trim().toLowerCase() === ((q.answer || q.answerText || '')).trim().toLowerCase();
+                    const userAns = q.type === 'choice'
+                        ? (answers[i] !== null ? q.options[answers[i]] : '未作答')
+                        : (answers[i] || '未作答');
+                    const correctAns = q.type === 'choice' ? q.options[q.answer] : (q.answer || q.answerText || '');
+                    return `
+                        <div style="padding:8px 12px; margin-bottom:4px; border-radius:8px; background:${isCorrect ? '#E8F8F5' : '#FDEAEA'}; font-size:13px;">
+                            ${isCorrect ? '\u2705' : '\u274C'} <strong>Q${i+1}.</strong> ${q.question.substring(0, 50)}...
+                            ${!isCorrect ? `<br><span style="color:var(--danger);">你的答案: ${userAns}</span> <span style="color:var(--success);">正确: ${correctAns}</span>` : ''}
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+
+            <div class="result-actions">
+                <button class="test-btn primary" onclick="openTest(${currentUnit.id}, ${testState.isWrongBookTest})">再测一次</button>
+                <button class="test-btn secondary" onclick="openLearn(${currentUnit.id})">复习知识点</button>
+                <button class="test-btn secondary" onclick="goHome()">返回首页</button>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('testView').innerHTML = html;
+}
+
+// ============================================================
+// Render Wrong Book View
+// ============================================================
+function openWrongBook() {
+    showView('wrongBook');
+    renderWrongBook();
+}
+
+function renderWrongBook() {
+    const book = getWrongBook();
+    const grouped = getWrongBookByUnit();
+
+    if (book.length === 0) {
+        document.getElementById('wrongBookView').innerHTML = `
+            <div class="wb-empty">
+                <div class="wb-empty-icon">&#128218;</div>
+                <div class="wb-empty-text">错题本还是空的哦！<br>做错题后会自动记录在这里。</div>
+                <div style="margin-top: 20px;">
+                    <button class="test-btn secondary" onclick="goHome()">返回首页</button>
+                </div>
+            </div>
+        `;
+        return;
+    }
+
+    let html = `
+        <div class="wb-header">
+            <div>
+                <h3 style="font-size:20px; margin-bottom:4px;">&#128214; 我的错题本</h3>
+                <p style="font-size:14px; color:var(--text-light);">共 ${book.length} 道错题，继续练习吧！</p>
+            </div>
+            <div class="wb-stats">
+                <div class="test-controls">
+                    <button class="test-btn danger" onclick="clearWrongBook()">清空错题本</button>
+                    <button class="test-btn primary" onclick="testAllWrong()">全部重练</button>
+                </div>
+            </div>
+        </div>
+        <div class="wb-list">
+    `;
+
+    // Sort units by ID
+    const unitIds = Object.keys(grouped).map(Number).sort((a, b) => a - b);
+
+    unitIds.forEach(unitId => {
+        const unit = GRAMMAR_DATA.find(u => u.id === unitId);
+        const unitQuestions = grouped[unitId];
+
+        html += `
+            <div class="wb-unit-group">
+                <div class="wb-unit-header" style="background: ${unit ? unit.bgGradient : 'linear-gradient(135deg, #999 0%, #666 100%)'}">
+                    <span>${unit ? unit.icon + ' ' + unit.title : 'Unit ' + unitId} (${unitQuestions.length} 题)</span>
+                    <div style="display:flex; gap:8px; align-items:center;">
+                        <span class="wb-unit-count">${unitQuestions.length} 题</span>
+                        <button class="test-btn primary" style="padding:4px 12px; font-size:12px;" onclick="openTest(${unitId}, true)">错题重练</button>
+                    </div>
+                </div>
+        `;
+
+        unitQuestions.forEach((item, index) => {
+            html += `
+                <div class="wb-question-item">
+                    <div class="wb-q-number">${index + 1}</div>
+                    <div class="wb-q-content">
+                        <div class="wb-q-text">${item.question}</div>
+                        <div class="wb-q-detail">
+                            你的答案：<span class="wrong-answer">${item.userAnswer}</span><br>
+                            正确答案：<span class="correct-answer">${item.correctAnswer}</span><br>
+                            <small>&#128161; ${item.explanation}</small><br>
+                            <small style="color:#999;">错误次数：${item.wrongCount || 1} 次</small>
+                        </div>
+                    </div>
+                    <div class="wb-q-actions">
+                        <button class="wb-q-btn remove" onclick="removeFromWrongBook('${item.id}')">删除</button>
+                    </div>
+                </div>
+            `;
+        });
+
+        html += `</div>`;
+    });
+
+    html += `</div>`;
+
+    // Add back button at bottom
+    html += `
+        <div style="text-align:center; margin: 24px 0;">
+            <button class="test-btn secondary" onclick="goHome()" style="padding: 10px 30px;">返回首页</button>
+        </div>
+    `;
+
+    document.getElementById('wrongBookView').innerHTML = html;
+}
+
+function testAllWrong() {
+    const book = getWrongBook();
+    
+    if (book.length === 0) {
+        alert('错题本为空！');
+        return;
+    }
+    
+    // Group by unit and test each unit
+    const grouped = getWrongBookByUnit();
+    const unitIds = Object.keys(grouped).map(Number);
+    
+    if (unitIds.length === 0) return;
+    
+    // Start with the first unit's wrong book test
+    openTest(unitIds[0], true);
+}
+
+// ============================================================
+// Initialize
+// ============================================================
+renderHome();
+updateWrongBookCount();
+</script>
+
+</body>
+</html>
