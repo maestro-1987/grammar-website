@@ -765,6 +765,11 @@ function openTestMenu(id) {
     if (!unit) return;
     currentUnit = unit;
     showView('test');
+    // Count questions for each mode
+    const fillCount = (QUESTION_BANK[id] || []).filter(q => q.type === 'fill').length;
+    const transCount = (TRANSLATION_SENTENCES[id] || []).length;
+    const vocab = VOCABULARY[id] || { words: [], phrases: [] };
+    const vocabCount = vocab.words.length + vocab.phrases.length;
     const html = `
         <div class="unit-banner" style="background: ${unit.bgGradient}">
             <div class="unit-banner-icon">${unit.icon}</div>
@@ -776,25 +781,20 @@ function openTestMenu(id) {
         <div class="test-mode-selector">
             <h3>请选择测试模式</h3>
             <div class="mode-options">
-                <div class="mode-option" onclick="startTest(${unit.id}, 'grammar')">
-                    <div class="mode-icon">&#128221;</div>
-                    <div class="mode-title">语法测试</div>
-                    <div class="mode-desc">选择题+填空题<br>10题随机抽取</div>
+                <div class="mode-option" onclick="startTest(${unit.id}, 'grammar_fill')">
+                    <div class="mode-icon">&#9999;&#65039;</div>
+                    <div class="mode-title">语法填空题</div>
+                    <div class="mode-desc">涵盖本单元所有语法知识点<br>共 ${fillCount} 题</div>
                 </div>
-                <div class="mode-option" onclick="startTest(${unit.id}, 'grammar_full')">
-                    <div class="mode-icon">&#128218;</div>
-                    <div class="mode-title">综合测试</div>
-                    <div class="mode-desc">语法+单词+翻译<br>混合题型15题</div>
-                </div>
-                <div class="mode-option" onclick="startTest(${unit.id}, 'vocab')">
-                    <div class="mode-icon">&#128214;</div>
-                    <div class="mode-title">单词测试</div>
-                    <div class="mode-desc">单词选择+拼写<br>10题随机抽取</div>
-                </div>
-                <div class="mode-option" onclick="startTest(${unit.id}, 'translation')">
+                <div class="mode-option" onclick="startTest(${unit.id}, 'grammar_translate')">
                     <div class="mode-icon">&#127760;</div>
-                    <div class="mode-title">翻译测试</div>
-                    <div class="mode-desc">中翻英整句翻译<br>6题</div>
+                    <div class="mode-title">语法整句中译英</div>
+                    <div class="mode-desc">涵盖本单元所有语法知识点<br>共 ${transCount} 题</div>
+                </div>
+                <div class="mode-option" onclick="startTest(${unit.id}, 'vocab_translate')">
+                    <div class="mode-icon">&#128214;</div>
+                    <div class="mode-title">单词中译英</div>
+                    <div class="mode-desc">涵盖本单元所有单词和短语<br>共 ${vocabCount} 题</div>
                 </div>
             </div>
         </div>
@@ -815,22 +815,54 @@ function startTest(id, mode) {
     if (!unit) return;
     currentUnit = unit;
     let questions = [];
-    if (mode === 'grammar') {
+    if (mode === 'grammar_fill') {
+        // 语法填空题：涵盖当前unit中所有语法
         const bank = QUESTION_BANK[id] || [];
-        questions = shuffleArray([...bank]).slice(0, 10);
-    } else if (mode === 'grammar_full') {
-        const gq = shuffleArray([...(QUESTION_BANK[id] || [])]).slice(0, 5);
-        const vq = shuffleArray([...(VOCAB_QUESTIONS[id] || [])]).slice(0, 5);
-        const tq = shuffleArray([...(TRANSLATION_QUESTIONS[id] || [])]).slice(0, 5);
-        questions = shuffleArray([...gq, ...vq, ...tq]);
-    } else if (mode === 'vocab') {
-        questions = shuffleArray([...(VOCAB_QUESTIONS[id] || [])]).slice(0, 10);
-    } else if (mode === 'translation') {
-        questions = shuffleArray([...(TRANSLATION_QUESTIONS[id] || [])]);
+        questions = bank.filter(q => q.type === 'fill');
+        questions = shuffleArray(questions);
+    } else if (mode === 'grammar_translate') {
+        // 语法整句中译英：涵盖当前unit中所有语法
+        const sentences = TRANSLATION_SENTENCES[id] || [];
+        questions = sentences.map(s => ({
+            type: 'translation',
+            question: s.zh,
+            answer: s.en,
+            explanation: '参考答案：' + s.en
+        }));
+        questions = shuffleArray(questions);
+    } else if (mode === 'vocab_translate') {
+        // 单词中译英：涵盖当前unit中所有单词和短语
+        questions = generateVocabTranslateQuestions(id);
+        questions = shuffleArray(questions);
     }
     if (questions.length === 0) { alert('暂无题目！'); return; }
     testState = { questions: questions, currentIndex: 0, answers: new Array(questions.length).fill(null), completed: false, isWrongBookTest: false, testMode: mode };
     renderTest();
+}
+
+function generateVocabTranslateQuestions(unitId) {
+    const vocab = VOCABULARY[unitId];
+    if (!vocab) return [];
+    const questions = [];
+    // All words
+    vocab.words.forEach(w => {
+        questions.push({
+            type: 'translation',
+            question: w.zh,
+            answer: w.en,
+            explanation: w.zh + ' = ' + w.en
+        });
+    });
+    // All phrases
+    vocab.phrases.forEach(p => {
+        questions.push({
+            type: 'translation',
+            question: p.zh,
+            answer: p.en,
+            explanation: p.zh + ' = ' + p.en
+        });
+    });
+    return questions;
 }
 
 function openTest(id, isWrongBookTest) {
@@ -1103,7 +1135,7 @@ function renderTestResult() {
     document.getElementById('testView').innerHTML = html;
 }
 
-function startVocabTest(id) { startTest(id, 'vocab'); }
+function startVocabTest(id) { startTest(id, 'vocab_translate'); }
 
 // ============================================================
 // Wrong Book View
