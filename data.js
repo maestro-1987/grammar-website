@@ -523,7 +523,13 @@ const QUESTION_BANK = {
     { type: "fill", question: "I get home at a ___ to five. (差一刻五点)", answer: "quarter", explanation: "45分钟 = a quarter to + 下一小时" },
     { type: "fill", question: "What ___ is it? (问时间)", answer: "time", explanation: "What time is it? 询问时间" },
     { type: "fill", question: "I have four lessons ___ the morning.", answer: "in", explanation: "in the morning 是固定搭配" },
-    { type: "fill", question: "We raise the national flag ___ Monday.", answer: "on", explanation: "on 用于星期：on Monday" }
+    { type: "fill", question: "We raise the national flag ___ Monday.", answer: "on", explanation: "on 用于星期：on Monday" },
+    { type: "fill", question: "8:00 ___ means 上午八点. (填 a.m. 或 p.m.)", answer: "a.m.", explanation: "a.m. 表示上午（从午夜到中午）" },
+    { type: "fill", question: "3:30 ___ means 下午三点半. (填 a.m. 或 p.m.)", answer: "p.m.", explanation: "p.m. 表示下午（从中午到午夜）" },
+    { type: "fill", question: "I ___ home at 5 p.m. (说话人不在家，填go或come)", answer: "go", explanation: "go home 表示回家，说话人不在家" },
+    { type: "fill", question: "Please ___ home early. (说话人在家，填go或come)", answer: "come", explanation: "come home 表示回家，说话人在家" },
+    { type: "fill", question: "My birthday is ___ May. (填时间介词)", answer: "in", explanation: "in 用于月份：in May" },
+    { type: "fill", question: "I play football ___ the weekend. (填时间介词)", answer: "at", explanation: "at 用于周末：at the weekend" }
   ],
   2: [
     { type: "choice", question: "Choose: He ___ swimming.", options: ["like", "likes", "liking", "to like"], answer: 1, explanation: "主语 He 是第三人称单数，动词加 -s：likes" },
@@ -539,7 +545,10 @@ const QUESTION_BANK = {
     { type: "fill", question: "___ she like painting? (一般疑问句)", answer: "Does", explanation: "第三人称单数疑问用 Does" },
     { type: "fill", question: "Peter ___ (like) swimming.", answer: "likes", explanation: "Peter 是第三人称单数，加 -s：likes" },
     { type: "fill", question: "What subject ___ she like? (特殊疑问句)", answer: "does", explanation: "第三人称单数疑问用 does" },
-    { type: "fill", question: "Wang Min ___ (like) playing football.", answer: "likes", explanation: "Wang Min 是第三人称单数，加 -s：likes" }
+    { type: "fill", question: "Wang Min ___ (like) playing football.", answer: "likes", explanation: "Wang Min 是第三人称单数，加 -s：likes" },
+    { type: "fill", question: "I ___ Chinese. (表示喜欢，填like/love/favourite)", answer: "like", explanation: "like 表示喜欢" },
+    { type: "fill", question: "I ___ Chinese! (表示热爱，感情更强烈)", answer: "love", explanation: "love 表示热爱，感情比 like 更强烈" },
+    { type: "fill", question: "My ___ subject is Chinese. (表示最喜欢的)", answer: "favourite", explanation: "favourite 表示最喜欢的，最高级别" }
   ],
   3: [
     { type: "choice", question: "teach + er = ?", options: ["teaches", "teacher", "teaching", "teached"], answer: 1, explanation: "动词 + er = 职业名词：teach -> teacher（老师）" },
@@ -572,7 +581,10 @@ const QUESTION_BANK = {
     { type: "fill", question: "I am ___ (play) the piano now.", answer: "playing", explanation: "现在进行时：am playing" },
     { type: "fill", question: "She is ___ (write) a letter.", answer: "writing", explanation: "write 去e加-ing：writing" },
     { type: "fill", question: "What ___ wonderful concert! (感叹句)", answer: "a", explanation: "What + a/an + 形容词 + 名词" },
-    { type: "fill", question: "The kids are ___ (run) in the garden.", answer: "running", explanation: "run 双写n加-ing：running" }
+    { type: "fill", question: "The kids are ___ (run) in the garden.", answer: "running", explanation: "run 双写n加-ing：running" },
+    { type: "fill", question: "___ it a clever idea? (否定疑问句，表示惊讶)", answer: "Isn't", explanation: "否定疑问句：Isn't it...? 难道不是...吗？" },
+    { type: "fill", question: "She can play ___ guitar. (填适当词)", answer: "the", explanation: "弹奏乐器要加 the：play the guitar" },
+    { type: "fill", question: "What ___ beautiful song! (感叹句)", answer: "a", explanation: "What + a/an + 形容词 + 名词（单数）" }
   ],
   5: [
     { type: "choice", question: "___ you painting a picture? Yes, I am.", options: ["Do", "Are", "Is", "Am"], answer: 1, explanation: "现在进行时疑问：Are you painting...?" },
