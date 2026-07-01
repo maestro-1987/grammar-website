@@ -974,6 +974,22 @@ const TRANSLATION_SENTENCES = {
     {
       "zh": "我的弟弟李亮八点起床。",
       "en": "My little brother Li Liang gets up at eight o'clock."
+    },
+    {
+      "zh": "我下午五点回家。",
+      "en": "I go home at 5 p.m."
+    },
+    {
+      "zh": "请早点回家。",
+      "en": "Please come home early."
+    },
+    {
+      "zh": "我在周一升国旗。",
+      "en": "I raise the national flag on Monday."
+    },
+    {
+      "zh": "我的生日在五月。",
+      "en": "My birthday is in May."
     }
   ],
   "2": [
@@ -1000,6 +1016,18 @@ const TRANSLATION_SENTENCES = {
     {
       "zh": "放学后我们去不同的社团。",
       "en": "We go to different clubs after school."
+    },
+    {
+      "zh": "我喜欢语文。",
+      "en": "I like Chinese."
+    },
+    {
+      "zh": "我热爱语文！",
+      "en": "I love Chinese!"
+    },
+    {
+      "zh": "我最喜欢的科目是语文。",
+      "en": "My favourite subject is Chinese."
     }
   ],
   "3": [
@@ -1026,6 +1054,22 @@ const TRANSLATION_SENTENCES = {
     {
       "zh": "他想成为什么？",
       "en": "What does he want to be?"
+    },
+    {
+      "zh": "史密斯先生是一位老师。",
+      "en": "Mr Smith is a teacher."
+    },
+    {
+      "zh": "李小姐是一名护士。",
+      "en": "Miss Li is a nurse."
+    },
+    {
+      "zh": "格林夫人是一名医生。",
+      "en": "Mrs Green is a doctor."
+    },
+    {
+      "zh": "我想成为一名消防员。",
+      "en": "I want to be a firefighter."
     }
   ],
   "4": [
@@ -1104,6 +1148,14 @@ const TRANSLATION_SENTENCES = {
     {
       "zh": "你妈妈在做什么？她在帮我。",
       "en": "What is your mum doing? She is helping me."
+    },
+    {
+      "zh": "他们在同时唱歌。",
+      "en": "They are singing at the same time."
+    },
+    {
+      "zh": "一分钟有六十秒。",
+      "en": "One minute has 60 seconds."
     }
   ],
   "7": [
@@ -1156,6 +1208,18 @@ const TRANSLATION_SENTENCES = {
     {
       "zh": "他真好啊！",
       "en": "How kind of him!"
+    },
+    {
+      "zh": "猫在门后面。",
+      "en": "The cat is behind the door."
+    },
+    {
+      "zh": "车在房子前面。",
+      "en": "The car is in front of the house."
+    },
+    {
+      "zh": "进来之前先敲门。",
+      "en": "Knock on the door before you come in."
     }
   ]
 };
